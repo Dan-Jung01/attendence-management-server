@@ -1,10 +1,10 @@
+import express from "express";
+import cors from "cors";
+import db from "./models/index.js";
 var createError = require("http-errors");
-var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const cors = require("cors");
-const db = require("./models/index.js");
 
 // const { sequelize } = require("./models"); //db.sequelize
 
@@ -15,8 +15,8 @@ var adminLoginRouter = require("./routes/adminLogin");
 var getUserRouter = require("./routes/getUserInfo");
 var stateRouter = require("./routes/state");
 
-var app = express();
-
+const app = express();
+// const cors = require("cors");
 app.use(cors());
 
 // Sync Sequelize models
@@ -63,6 +63,10 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+app.listen(process.env.PORT || 3003, () => {
+  console.log("Server is listening on port 3003");
 });
 
 module.exports = app;
