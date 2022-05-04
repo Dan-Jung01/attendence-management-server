@@ -25,7 +25,7 @@ router.delete("/userInfo/:userId", async function (req, res) {
       id: { [Op.eq]: test },
     },
   })
-    .then((res) => console.log(res))
+    .then((r) => res.json(r))
     .catch((err) => {
       console.log(err);
     });
@@ -47,7 +47,7 @@ router.put("/userInfo", function (req, res) {
         user_id: user_id,
       },
     }
-  );
+  ).then((r) => res.json(true));
 });
 
 module.exports = router;
