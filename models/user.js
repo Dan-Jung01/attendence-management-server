@@ -54,6 +54,13 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
     });
 
+    table.hasMany(models.Break, {
+      foreignKey: "user_id",
+      as: "breaks",
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    });
+
     // table.hasMany(models.State, {
     //   foreignKey: "user_id",
     //   as: "state",
