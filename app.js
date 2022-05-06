@@ -14,6 +14,7 @@ var loginRouter = require("./routes/login");
 var adminLoginRouter = require("./routes/adminLogin");
 var getUserRouter = require("./routes/getUserInfo");
 var stateRouter = require("./routes/state");
+var breakRouter = require("./routes/break");
 
 const app = express();
 // const cors = require("cors");
@@ -48,6 +49,7 @@ app.use("/user", getUserRouter);
 app.use("/user", registerRouter);
 app.use("/user", loginRouter);
 app.use("/user", adminLoginRouter);
+app.use("/user", breakRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
