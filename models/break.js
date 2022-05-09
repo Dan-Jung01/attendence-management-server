@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       leave_created_date: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: true,
         comment: "연차생성날짜",
       },
       user_name: {
