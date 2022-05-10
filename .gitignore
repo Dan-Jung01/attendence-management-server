@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Configuration files(Database or AWS Credential or FCM ...)
+config/*
