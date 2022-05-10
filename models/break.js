@@ -33,11 +33,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         comment: "연차종료날짜",
       },
-      leave_created_date: {
-        type: DataTypes.STRING(100),
-        allowNull: true,
-        comment: "연차생성날짜",
-      },
       user_name: {
         type: DataTypes.STRING(60),
         allowNull: false,
