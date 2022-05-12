@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 
 /* Post Leave period and reason */
 router.post("/break", function (req, res) {
-  const { start_date, end_date, today_date, user_name, user_id } = req.body;
+  const { start_date, end_date, today_date, user_name, user_id, reason } = req.body;
 
   Break.create({
     start_date: start_date,
@@ -14,6 +14,7 @@ router.post("/break", function (req, res) {
     today_date: today_date,
     user_name: user_name,
     user_id: user_id,
+    reason: reason,
     status: "DEFER",
   }).then((r) => res.json(r));
 });
