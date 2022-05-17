@@ -23,12 +23,28 @@ router.get("/break", function (req, res) {
   Break.findAll({})
     .then((data) => {
       const userData = data.map((mData) => mData);
+
       res.json(userData);
-      console.log(userData);
     })
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.delete("/break/:id", async function (req, res) {
+  const id = req.params.id;
+
+  try {
+    const deleteUser = await Break.destroy({
+      where: {
+        id: { [Op.eq]: id },
+      },
+    });
+
+    res.json(deleteUser);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;
