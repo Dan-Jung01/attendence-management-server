@@ -19,4 +19,16 @@ router.post("/break", function (req, res) {
   }).then((r) => res.json(r));
 });
 
+router.get("/break", function (req, res) {
+  Break.findAll({})
+    .then((data) => {
+      const userData = data.map((mData) => mData);
+      res.json(userData);
+      console.log(userData);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
