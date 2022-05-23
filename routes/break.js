@@ -47,4 +47,23 @@ router.delete("/break/:id", async function (req, res) {
   }
 });
 
+router.put("/break/approval", async function (req, res) {
+  const { status, id } = req.body;
+
+  try {
+    await Break.update(
+      {
+        status: status,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    ).then((r) => res.json(r));
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;
