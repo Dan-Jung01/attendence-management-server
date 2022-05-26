@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       user_pwd: {
-        type: DataTypes.STRING(60),
+        type: DataTypes.CHAR(60),
         comment: "비밀번호",
         allowNull: false,
       },
@@ -25,21 +25,26 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         comment: "이름",
         allowNull: false,
+        unique: true,
       },
       phone: {
-        type: DataTypes.STRING(72),
+        type: DataTypes.INTEGER,
         comment: "전화번호",
         allowNull: false,
       },
       start_date: {
-        type: DataTypes.STRING(72),
+        type: DataTypes.DATE,
         comment: "입사일",
+        allowNull: false,
+      },
+      break_cnt: {
+        type: DataTypes.INTEGER,
+        comment: "연차개수",
         allowNull: false,
       },
     },
     {
       tableName: "users", // 테이블 이름
-      // underscored: true,
       timestamps: true, // createAt & updateAt 활성화
       charset: "utf8", // 한국어 설정
       collate: "utf8_general_ci", // 한국어 설정
