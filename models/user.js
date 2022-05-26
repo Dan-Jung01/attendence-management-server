@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
         comment: "전화번호",
         allowNull: false,
       },
