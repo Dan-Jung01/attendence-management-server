@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 
 /* Get User Info */
 router.get("/userInfo", function (req, res, next) {
-  User.findAll({})
+  User.findAll({ order: [[Sequelize.col("id"), "DESC"]] })
     .then((data) => {
       const userData = data.map((mData) => mData);
       res.json(userData);

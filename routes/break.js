@@ -20,7 +20,7 @@ router.post("/break", function (req, res) {
 });
 
 router.get("/break", function (req, res) {
-  Break.findAll({})
+  Break.findAll({ order: [[Sequelize.col("id"), "DESC"]] })
     .then((data) => {
       const userData = data.map((mData) => mData);
 
