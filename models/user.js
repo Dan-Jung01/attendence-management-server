@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       start_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING(100),
         comment: "입사일",
         allowNull: false,
       },
