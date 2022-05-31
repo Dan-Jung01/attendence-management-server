@@ -6,12 +6,13 @@ const Op = Sequelize.Op;
 
 /* Post Leave period and reason */
 router.post("/break", function (req, res) {
-  const { start_date, end_date, today_date, user_name, user_id, reason } = req.body;
+  const { start_date, end_date, today_date, used_date_cnt, user_name, user_id, reason } = req.body;
 
   Break.create({
     start_date: start_date,
     end_date: end_date,
     today_date: today_date,
+    used_date_cnt: used_date_cnt,
     user_name: user_name,
     user_id: user_id,
     reason: reason,

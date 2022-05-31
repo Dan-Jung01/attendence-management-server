@@ -38,13 +38,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         comment: "이름",
       },
+      used_date_cnt: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        comment: "연차사용일 카운트",
+      },
       reason: {
         type: DataTypes.STRING(100),
         allowNull: true,
         comment: "연차사유",
       },
       status: {
-        type: Sequelize.ENUM("APPROVED", "DEFER", "REJECTED", "CHECKING"),
+        type: Sequelize.ENUM("APPROVED", "DEFER", "REJECTED"),
         allowNull: true,
         comment: "요청상태",
       },
