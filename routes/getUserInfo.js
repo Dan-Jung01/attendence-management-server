@@ -69,4 +69,22 @@ router.put("/userInfo", function (req, res) {
   ).then((r) => res.json(true));
 });
 
+/* Edit User Break Info */
+router.put("/userInfo/break", function (req, res) {
+  const { user_id, used_date_cnt } = req.body;
+
+  User.update(
+    {
+      // break_cnt: break_cnt - used_date_cnt,
+      // break_cnt: Sequelize.literal(`${break_cnt} - ${used_date_cnt}`),
+      break_cnt: Sequelize.literal(`break_cnt - ${used_date_cnt}`),
+    },
+    {
+      where: {
+        user_id: user_id,
+      },
+    }
+  ).then((r) => res.json(r));
+});
+
 module.exports = router;
