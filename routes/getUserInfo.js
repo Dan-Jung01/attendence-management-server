@@ -16,6 +16,25 @@ router.get("/userInfo", function (req, res, next) {
     });
 });
 
+/* Get Certain User Info */
+router.get("/userInfo/:userId", function (req, res, next) {
+  const user_id = req.params.userId;
+
+  User.findOne({
+    attributes: ["break_cnt", "user_id"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+    },
+  })
+    .then((data) => {
+      // const userData = data.map((mData) => mData);
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 /* Delete User Info */
 router.delete("/userInfo/:userId", async function (req, res) {
   const test = req.params.userId;
