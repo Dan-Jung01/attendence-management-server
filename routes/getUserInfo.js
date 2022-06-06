@@ -52,7 +52,7 @@ router.delete("/userInfo/:userId", async function (req, res) {
 
 /* Edit User Info */
 router.put("/userInfo", function (req, res) {
-  const { user_name, user_id, phone, start_date } = req.body;
+  const { user_name, user_id, phone, start_date, break_cnt } = req.body;
 
   User.update(
     {
@@ -60,6 +60,7 @@ router.put("/userInfo", function (req, res) {
       user_id: user_id,
       phone: phone,
       start_date: start_date,
+      break_cnt,
     },
     {
       where: {
