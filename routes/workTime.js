@@ -3,6 +3,7 @@ var router = express.Router();
 const { Worktime, sequelize } = require("../models");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
+import moment from "moment";
 
 // Post on_work Time into DB
 router.post("/work", function (req, res) {
@@ -55,7 +56,7 @@ router.put("/work", function (req, res, next) {
         today_date: today_date,
       },
     }
-  );
+  ).then((r) => res.json(r));
 });
 
 router.put("/both-work-time", function (req, res) {
@@ -163,6 +164,75 @@ router.get("/user-work-record", function (req, res, next) {
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.put("/check-late", function (req, res) {
+  const { user_id, today_date } = req.body;
+
+  Worktime.update(
+    {
+      state_late: 1,
+    },
+    {
+      where: {
+        user_id: user_id,
+        today_date: today_date,
+      },
+    }
+  ).then((r) => res.json(r));
+});
+
+router.put("/check-early", function (req, res) {
+  const { user_id, today_date } = req.body;
+
+  Worktime.update(
+    {
+      state_early_check: 1,
+    },
+    {
+      where: {
+        user_id: user_id,
+        today_date: today_date,
+      },
+    }
+  ).then((r) => res.json(r));
+});
+
+// router.put("/check-absence", function (req, res) {
+//   const { user_id, today_date } = req.body;
+
+//   let dayOfWeek = today_date.getDay();
+//   let isWeekend = dayOfWeek === 6 || dayOfWeek === 0; // 6 = Saturday, 0 = Sunday
+
+//   const yesterdayData = Worktime.findOne({
+//     attributes: ["today_date"],
+//     where: {},
+//   });
+
+//   Worktime.update(
+//     {
+//       state_absence: 1,
+//     },
+//     {
+//       where: {
+//         user_id: user_id,
+//         today_date: today_date,
+//       },
+//     }
+//   ).then((r) => res.json(r));
+// });
+
+router.get("/late-count", function (req, res) {
+  const { user_id } = req.query;
+
+  Worktime.findAll({
+    attributes: ["state_late"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+      state_late: 1,
+    },
+    raw: true,
+  }).then((r) => res.json(r.length));
 });
 
 module.exports = router;
