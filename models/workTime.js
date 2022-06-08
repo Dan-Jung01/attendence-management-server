@@ -40,6 +40,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(72),
         comment: "하루근무시간",
       },
+      state_late: {
+        type: DataTypes.INTEGER,
+        comment: "지각",
+      },
+      state_absence: {
+        type: DataTypes.INTEGER,
+        comment: "결근",
+      },
+      state_miss_check: {
+        type: DataTypes.INTEGER,
+        comment: "퇴근미체크",
+      },
+      state_early_check: {
+        type: DataTypes.INTEGER,
+        comment: "조기퇴근",
+      },
     },
     {
       charset: "utf8", // 한국어 설정
