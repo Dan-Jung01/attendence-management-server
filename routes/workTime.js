@@ -73,7 +73,7 @@ router.put("/both-work-time", function (req, res) {
         today_date: today_date,
       },
     }
-  );
+  ).then((r) => res.json(r));
 });
 
 // Get workTime Table Data from DB
