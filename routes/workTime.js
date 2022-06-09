@@ -167,19 +167,33 @@ router.get("/user-work-record", function (req, res, next) {
 });
 
 router.put("/check-late", function (req, res) {
-  const { user_id, today_date } = req.body;
+  const { user_id, today_date, is_late } = req.body;
 
-  Worktime.update(
-    {
-      state_late: 1,
-    },
-    {
-      where: {
-        user_id: user_id,
-        today_date: today_date,
+  if (is_late) {
+    Worktime.update(
+      {
+        state_late: 1,
       },
-    }
-  ).then((r) => res.json(r));
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  } else {
+    Worktime.update(
+      {
+        state_late: 0,
+      },
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  }
 });
 
 router.put("/check-early", function (req, res) {
