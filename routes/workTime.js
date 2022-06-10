@@ -197,19 +197,33 @@ router.put("/check-late", function (req, res) {
 });
 
 router.put("/check-early", function (req, res) {
-  const { user_id, today_date } = req.body;
+  const { user_id, today_date, is_early } = req.body;
 
-  Worktime.update(
-    {
-      state_early_check: 1,
-    },
-    {
-      where: {
-        user_id: user_id,
-        today_date: today_date,
+  if (is_early) {
+    Worktime.update(
+      {
+        state_early_check: 1,
       },
-    }
-  ).then((r) => res.json(r));
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  } else {
+    Worktime.update(
+      {
+        state_early_check: 0,
+      },
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  }
 });
 
 // router.put("/check-absence", function (req, res) {
