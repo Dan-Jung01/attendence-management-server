@@ -27,19 +27,7 @@ router.post("/work", function (req, res) {
     user_name: user_name,
     off_work: "00:00:00",
     user_id: user_id,
-  }).then(() => {
-    Worktime.findOne(
-      {
-        attributes: ["on_work"],
-      },
-      {
-        where: {
-          user_name: user_name,
-          today_date: today_date,
-        },
-      }
-    ).then((ress) => res.json(ress));
-  });
+  }).then((r) => res.json(r));
 });
 
 //Put off_work Time into DB
