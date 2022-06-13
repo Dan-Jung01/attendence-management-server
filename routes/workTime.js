@@ -294,8 +294,17 @@ router.get("/status", async function (req, res) {
       raw: true,
     });
 
+    const stateMissCheck = await Worktime.findAll({
+      attributes: [Sequelize.literal(`sum(state_miss_check) state_miss_check`)],
+      where: {
+        user_id: { [Op.eq]: user_id },
+        state_miss_check: 1,
+      },
+      raw: true,
+    });
+
     // res.json(stateLate, stateEarlyCheck);
-    Promise.all([stateLate, stateEarlyCheck]).then((values) => {
+    Promise.all([stateLate, stateEarlyCheck, stateMissCheck]).then((values) => {
       res.json(values);
     });
   } catch (err) {
