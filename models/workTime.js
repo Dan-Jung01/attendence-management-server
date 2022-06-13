@@ -42,23 +42,23 @@ module.exports = (sequelize, DataTypes) => {
       },
       state_late: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
         comment: "지각",
+        allowNull: false,
       },
       state_absence: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
         comment: "결근",
+        allowNull: false,
       },
       state_miss_check: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
         comment: "퇴근미체크",
+        allowNull: false,
       },
       state_early_check: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
         comment: "조기퇴근",
+        allowNull: false,
       },
     },
     {
