@@ -27,6 +27,10 @@ router.post("/work", function (req, res) {
     user_name: user_name,
     off_work: "00:00:00",
     user_id: user_id,
+    state_late: 0,
+    state_early_check: 0,
+    state_miss_check: 0,
+    state_absence: 0,
   }).then((r) => res.json(r));
 });
 
@@ -214,6 +218,36 @@ router.put("/check-early", function (req, res) {
   }
 });
 
+router.put("/check-miss", function (req, res) {
+  const { user_id, today_date, is_miss } = req.body;
+
+  if (is_miss) {
+    Worktime.update(
+      {
+        state_miss_check: 1,
+      },
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  } else {
+    Worktime.update(
+      {
+        state_miss_check: 0,
+      },
+      {
+        where: {
+          user_id: user_id,
+          today_date: today_date,
+        },
+      }
+    ).then((r) => res.json(r));
+  }
+});
+
 // router.put("/check-absence", function (req, res) {
 //   const { user_id, today_date } = req.body;
 
@@ -259,6 +293,7 @@ router.get("/status", async function (req, res) {
       },
       raw: true,
     });
+
     // res.json(stateLate, stateEarlyCheck);
     Promise.all([stateLate, stateEarlyCheck]).then((values) => {
       res.json(values);
