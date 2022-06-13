@@ -70,17 +70,30 @@ router.put("/both-work-time", function (req, res) {
 
 // Get workTime Table Data from DB
 router.get("/work-time", function (req, res, next) {
-  Worktime.findAll({
-    order: sequelize.col("id"),
-    attributes: ["id", "user_id", "on_work", "off_work", "today_date", "user_name"],
-  })
-    .then((data) => {
+  const { startDate, endDate } = req.query;
+
+  if (startDate && endDate) {
+    Worktime.findAll({
+      attributes: ["id", "user_id", "on_work", "off_work", "today_date", "user_name"],
+      where: { today_date: { [Op.between]: [startDate, endDate] } },
+      order: sequelize.col("id"),
+    }).then((data) => {
       const workData = data.map((mData) => mData).reverse();
       res.json(workData);
-    })
-    .catch((err) => {
-      console.log(err);
     });
+  } else {
+    Worktime.findAll({
+      attributes: ["id", "user_id", "on_work", "off_work", "today_date", "user_name"],
+      order: sequelize.col("id"),
+    }).then((data) => {
+      const workData = data.map((mData) => mData).reverse();
+      res.json(workData);
+    });
+  }
+
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 });
 
 router.delete("/work-time/:id", async function (req, res) {
