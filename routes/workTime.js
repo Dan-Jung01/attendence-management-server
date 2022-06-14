@@ -36,11 +36,12 @@ router.post("/work", function (req, res) {
 
 //Put off_work Time into DB
 router.put("/work", function (req, res, next) {
-  const { off_work, today_date, user_name } = req.body;
+  const { off_work, today_date, user_name, total_work } = req.body;
 
   Worktime.update(
     {
       off_work: off_work,
+      total_work: total_work,
     },
     {
       where: {
