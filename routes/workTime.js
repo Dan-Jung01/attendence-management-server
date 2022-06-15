@@ -123,9 +123,10 @@ router.get("/on-work-time", async function (req, res, next) {
         user_name: { [Op.eq]: user_name },
         today_date: { [Op.eq]: today_date },
       },
+      raw: true,
     });
     // console.log(findWorkTime.dataValues);
-    res.json(findWorkTime.dataValues);
+    res.json(findWorkTime);
   } catch (err) {
     console.log(err);
   }
