@@ -336,4 +336,67 @@ router.get("/status", async function (req, res) {
   // }).then((res) => console.log(res));
 });
 
+// Get workTime Table Data from DB
+router.get("/late-status", function (req, res, next) {
+  const { user_id } = req.query;
+
+  Worktime.findAll({
+    attributes: ["id", "today_date", "on_work"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+      state_late: { [Op.eq]: 1 },
+    },
+  })
+    .then((data) => {
+      const workData = data.map((mData) => mData).reverse();
+      // console.log(workData);
+      res.json(workData);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// Get workTime Table Data from DB
+router.get("/early-status", function (req, res, next) {
+  const { user_id } = req.query;
+
+  Worktime.findAll({
+    attributes: ["id", "today_date", "on_work"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+      state_early_check: { [Op.eq]: 1 },
+    },
+  })
+    .then((data) => {
+      const workData = data.map((mData) => mData).reverse();
+      // console.log(workData);
+      res.json(workData);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// Get workTime Table Data from DB
+router.get("/miss-status", function (req, res, next) {
+  const { user_id } = req.query;
+
+  Worktime.findAll({
+    attributes: ["id", "today_date", "on_work"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+      state_miss_check: { [Op.eq]: 1 },
+    },
+  })
+    .then((data) => {
+      const workData = data.map((mData) => mData).reverse();
+      // console.log(workData);
+      res.json(workData);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
