@@ -31,35 +31,35 @@ router.get("/all-status", function (req, res) {
   });
 });
 
-router.put("/late-status", function (req, res) {
-  const { user_id } = req.body;
+// router.put("/late-status", function (req, res) {
+//   const { user_id } = req.body;
 
-  State.update(
-    {
-      state_late: Sequelize.literal("state_late + 1"),
-    },
-    {
-      where: {
-        user_id: user_id,
-      },
-    }
-  );
-});
+//   State.update(
+//     {
+//       state_late: Sequelize.literal("state_late + 1"),
+//     },
+//     {
+//       where: {
+//         user_id: user_id,
+//       },
+//     }
+//   );
+// });
 
-router.put("/early-status", function (req, res) {
-  const { user_id } = req.body;
+// router.put("/early-status", function (req, res) {
+//   const { user_id } = req.body;
 
-  State.update(
-    {
-      state_early_check: Sequelize.literal("state_early_check + 1"),
-    },
-    {
-      where: {
-        user_id: user_id,
-      },
-    }
-  );
-});
+//   State.update(
+//     {
+//       state_early_check: Sequelize.literal("state_early_check + 1"),
+//     },
+//     {
+//       where: {
+//         user_id: user_id,
+//       },
+//     }
+//   );
+// });
 
 // router.put("/arly-status", function (req, res) {
 //   const { user_id } = req.body;
