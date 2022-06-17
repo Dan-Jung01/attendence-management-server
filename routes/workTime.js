@@ -358,20 +358,25 @@ router.get("/late-status", function (req, res, next) {
 });
 
 // Get workTime Table Data from DB
-router.get("/early-status", function (req, res, next) {
+router.get("/miss-status", function (req, res, next) {
   const { user_id } = req.query;
 
   Worktime.findAll({
-    attributes: ["id", "today_date", "on_work"],
+    attributes: ["id", "today_date", "off_work"],
     where: {
       user_id: { [Op.eq]: user_id },
-      state_early_check: { [Op.eq]: 1 },
+      state_miss_check: { [Op.eq]: 1 },
     },
   })
     .then((data) => {
-      const workData = data.map((mData) => mData).reverse();
-      // console.log(workData);
-      res.json(workData);
+      if (data) {
+        const workData = data.map((mData) => mData).reverse();
+        // console.log(workData);
+        res.json(workData);
+      } else {
+        console.log(data);
+        res.json([]);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -379,14 +384,14 @@ router.get("/early-status", function (req, res, next) {
 });
 
 // Get workTime Table Data from DB
-router.get("/miss-status", function (req, res, next) {
+router.get("/early-status", function (req, res, next) {
   const { user_id } = req.query;
 
   Worktime.findAll({
-    attributes: ["id", "today_date", "on_work"],
+    attributes: ["id", "today_date", "off_work"],
     where: {
       user_id: { [Op.eq]: user_id },
-      state_miss_check: { [Op.eq]: 1 },
+      state_early_check: { [Op.eq]: 1 },
     },
   })
     .then((data) => {
