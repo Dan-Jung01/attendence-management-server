@@ -8,8 +8,7 @@ require("dotenv").config();
 
 /* POST Login */
 router.post("/login", async function (req, res) {
-  const user_id = req.body.user_id;
-  const user_pwd = req.body.user_pwd;
+  const { user_id, user_pwd } = req.body;
   const Op = Sequelize.Op;
 
   try {
@@ -33,12 +32,12 @@ router.post("/login", async function (req, res) {
     if (match) {
       // Create and return JWT token
       const secretKey = process.env.SECRETKEY;
-      const expires_in = 60 * 60 * 24; // 1DAY
-      const exp = Date.now() + expires_in * 1000;
-      delete user.user_pwd;
-      const token = jwt.sign({ user, exp }, secretKey);
+      user.user_pwd = undefined;
+      const token = jwt.sign(user.dataValues, secretKey, {
+        expiresIn: "1 day",
+      });
 
-      res.status(200).json({ token, token_type: "Bearer", expires_in });
+      res.status(200).json({ token, token_type: "Bearer" });
     } else {
       res.status(401).json({
         error: true,
