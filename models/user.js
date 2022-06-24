@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
         comment: "연차개수",
         allowNull: false,
       },
+      type: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
     },
     {
       tableName: "users", // 테이블 이름
