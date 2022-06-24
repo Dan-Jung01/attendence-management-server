@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
 router.post("/register", function (req, res, next) {
-  const { user_id, user_pwd, user_name, start_date, phone, break_cnt } = req.body;
+  const { user_id, user_pwd, user_name, start_date, phone, break_cnt, type } = req.body;
 
   // Vertify body
   if (!user_id || !user_pwd) {
@@ -38,6 +38,7 @@ router.post("/register", function (req, res, next) {
       start_date: start_date,
       phone: phone,
       break_cnt: break_cnt,
+      type: type,
     }).then(res.status(201).json({ success: "true", message: "User created" }));
   });
 });
