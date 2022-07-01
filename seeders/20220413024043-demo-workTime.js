@@ -12,7 +12,7 @@ module.exports = {
      * }], {});
      */
 
-    await queryInterface.bulkInsert("Worktime", [
+    await queryInterface.bulkInsert("work_time", [
       {
         user_id: "test1",
         today_date: "2021-11-13",

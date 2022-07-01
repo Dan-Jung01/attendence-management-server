@@ -12,7 +12,7 @@ module.exports = {
      * }], {});
      */
 
-    await queryInterface.bulkInsert("Users", [
+    await queryInterface.bulkInsert("user", [
       {
         user_id: "test1",
         user_pwd: "$2b$10$ea/GPKUup1XSr.z/fXDMmOhcqNLDA8hE4p7ffSHoS6w5WdmbmOfd6",

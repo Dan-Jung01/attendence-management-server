@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "users", // 테이블 이름
+      tableName: "user", // 테이블 이름
       timestamps: true, // createAt & updateAt 활성화
       charset: "utf8", // 한국어 설정
       collate: "utf8_general_ci", // 한국어 설정

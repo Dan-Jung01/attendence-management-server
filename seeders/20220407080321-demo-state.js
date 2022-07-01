@@ -12,7 +12,7 @@ module.exports = {
      * }], {});
      */
 
-    await queryInterface.bulkInsert("State", [
+    await queryInterface.bulkInsert("state", [
       {
         user_id: "test1",
         state_late: 0,
