@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../models");
+const { User } = require("../../models");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -16,7 +16,7 @@ router.get("/userInfo", function (req, res, next) {
     });
 });
 
-/* Get Certain User Info */
+/* Get User's Break Count */
 router.get("/userInfo/:userId", function (req, res, next) {
   const user_id = req.params.userId;
 
@@ -27,7 +27,6 @@ router.get("/userInfo/:userId", function (req, res, next) {
     },
   })
     .then((data) => {
-      // const userData = data.map((mData) => mData);
       res.json(data);
     })
     .catch((err) => {
@@ -70,7 +69,7 @@ router.put("/userInfo", function (req, res) {
   ).then((r) => res.json(true));
 });
 
-/* Edit User Break Info */
+/* Edit User's rest Break Count */
 router.put("/userInfo/break", function (req, res) {
   const { user_id, used_date_cnt } = req.body;
 

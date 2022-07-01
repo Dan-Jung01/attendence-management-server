@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import db from "./models/index.js";
+import bodyParser from "body-parser";
 var createError = require("http-errors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -8,16 +9,7 @@ var logger = require("morgan");
 
 // const { sequelize } = require("./models"); //db.sequelize
 
-var workTimeRouter = require("./routes/workTime");
-var registerRouter = require("./routes/register");
-var loginRouter = require("./routes/login");
-var adminLoginRouter = require("./routes/adminLogin");
-var getUserRouter = require("./routes/getUserInfo");
-var stateRouter = require("./routes/state");
-var breakRouter = require("./routes/break");
-
 const app = express();
-// const cors = require("cors");
 app.use(cors());
 
 // Sync Sequelize models
@@ -38,18 +30,13 @@ app.set("view engine", "jade");
 app.set("port", process.env.PORT || 3003);
 
 app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", workTimeRouter);
-app.use("/", stateRouter);
-app.use("/user", getUserRouter);
-app.use("/user", registerRouter);
-app.use("/user", loginRouter);
-app.use("/user", adminLoginRouter);
-app.use("/user", breakRouter);
+// Routes
+app.use(require("./routes"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

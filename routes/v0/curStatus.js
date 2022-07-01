@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../models");
-const { Worktime } = require("../models");
+const { User } = require("../../models");
+const { Worktime } = require("../../models");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
 

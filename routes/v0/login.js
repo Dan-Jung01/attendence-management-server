@@ -2,14 +2,14 @@ var express = require("express");
 var router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User } = require("../../models");
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
+const Op = Sequelize.Op;
 
 /* POST Login */
 router.post("/login", async function (req, res) {
   const { user_id, user_pwd } = req.body;
-  const Op = Sequelize.Op;
 
   try {
     const matchUser = await User.findAll({
@@ -51,22 +51,35 @@ router.post("/login", async function (req, res) {
 });
 
 /* GET User Token Info */
-router.get("/login", async function (req, res) {
-  const { token } = req.query;
-  const decoded = jwt.verify(token, process.env.SECRETKEY);
+router.get("/check-type", async function (req, res) {
+  const { user_id } = req.query;
+  console.log(user_id);
 
-  try {
-    if (!decoded) {
-      //토큰이 존재하지 않으면 status 401 전송
-      return res.status(401).send("need user token");
-    }
+  await User.findOne({
+    attributes: ["type"],
+    where: {
+      user_id: { [Op.eq]: user_id },
+    },
+    raw: true,
+  }).then((userType) => {
+    console.log(userType);
+    res.json(userType);
+  });
 
-    const decodedToken = await User.findOne({ where: { user_id: decoded.user.user_id } }); //토큰으로부터 userid 받아옴
-    delete decodedToken.dataValues.user_pwd;
-    res.json(decodedToken.dataValues);
-  } catch (err) {
-    console.log(err);
-  }
+  // const decoded = jwt.verify(token, process.env.SECRETKEY);
+
+  // try {
+  //   if (!decoded) {
+  //     //토큰이 존재하지 않으면 status 401 전송
+  //     return res.status(401).send("need user token");
+  //   }
+
+  //   const decodedToken = await User.findOne({ where: { user_id: decoded.user.user_id } }); //토큰으로부터 userid 받아옴
+  //   delete decodedToken.dataValues.user_pwd;
+  //   res.json(decodedToken.dataValues);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 });
 
 module.exports = router;

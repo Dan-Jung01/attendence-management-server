@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const { User } = require("../../models");
 
 router.post("/register", function (req, res, next) {
   const { user_id, user_pwd, user_name, start_date, phone, break_cnt, type } = req.body;

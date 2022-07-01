@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { State } = require("../models");
+const { State } = require("../../models");
 const { Sequelize } = require("sequelize");
 
 // Post on_work Time into DB

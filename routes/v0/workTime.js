@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Worktime, sequelize } = require("../models");
+const { Worktime, sequelize } = require("../../models");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
-import moment from "moment";
 
 // Post on_work Time into DB
 router.post("/work", function (req, res) {
@@ -371,7 +370,6 @@ router.get("/miss-status", function (req, res, next) {
     .then((data) => {
       if (data) {
         const workData = data.map((mData) => mData).reverse();
-        // console.log(workData);
         res.json(workData);
       } else {
         console.log(data);
