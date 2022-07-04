@@ -27,7 +27,7 @@ db.sequelize
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.set("port", process.env.PORT || 3003);
+app.set("port", process.env.PORT || 443);
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -54,8 +54,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.listen(process.env.PORT || 3003, () => {
-  console.log("Server is listening on port 3003");
+app.listen(process.env.PORT || 443, () => {
+  console.log("Server is listening on port 443");
 });
 
 module.exports = app;
